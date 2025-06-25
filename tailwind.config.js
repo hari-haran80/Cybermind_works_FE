@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        satoshi: ['"Satoshi Variable"', 'sans-serif'],
+      },
       screens: {
         'max-w-540': {'max': '540px'},
         'max-w-768': {'max': '768px'},

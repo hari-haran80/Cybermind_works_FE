@@ -1,16 +1,14 @@
 import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
 import { Outlet } from "react-router-dom";
 
 const HomeLayout = () => {
   return (
-    <>
+    <div className="font-satoshi">
       <Header />
-      <main>
+      <main className="pt-[100px]">
         <Outlet />
       </main>
-      <Footer />
-    </>
+    </div>
   );
 };
 

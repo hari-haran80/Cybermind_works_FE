@@ -12,7 +12,14 @@ const api = axios.create({
 // Get Jobs with Filters
 export const getJobs = async (filters = {}) => {
   try {
-    const response = await api.get("/career/jobs/", { params: filters });
+    // Clean up empty filters
+    const params = Object.fromEntries(
+      Object.entries(filters).filter(([_, value]) => 
+        value !== "" && value !== null && value !== undefined
+      )
+    );
+    
+    const response = await api.get("/career/jobs/", { params });
     return response.data;
   } catch (error) {
     console.error("Error fetching jobs:", error);
@@ -38,6 +45,28 @@ export const getSalaryRange = async () => {
     return response.data;
   } catch (error) {
     console.error("Error fetching salary range:", error);
+    throw error;
+  }
+};
+
+// get job Locations
+export const getJobLocations = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/career/jobs/locations/`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching job locations:", error);
+    throw error;
+  }
+};
+
+// get Job Titles
+export const getJobTitles = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/career/jobs/titles/`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching job titles:", error);
     throw error;
   }
 };

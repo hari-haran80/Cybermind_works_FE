@@ -8,8 +8,8 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="w-full h-[100px] fixed flex items-center justify-center px-4 sm:px-6">
-      <div className="w-full max-w-[890px]  p-4 sm:px-6 h-[80px] rounded-[50px] shadow-[0_2px_6px_0_rgba(0,0,0,0.3)] flex items-center justify-between bg-white">
+    <div className="z-[999] w-full h-[100px] fixed flex items-center justify-center px-4 sm:px-6">
+      <div className="w-full max-w-[890px]  p-4 sm:px-6 h-[80px] rounded-[50px] z-40 shadow-[0_2px_6px_0_rgba(0,0,0,0.3)] flex items-center justify-between bg-white">
         <img src={Logo} alt="Logo" className="h-[45px] sm:h-[50px] w-auto" />
         <div className="hidden md:flex gap-2 text-[16px] h-[40px] items-center justify-center font-[600] text-gray-700">
           <a
@@ -60,7 +60,7 @@ const Header = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="absolute top-[100px] w-[90%] max-w-[890px] bg-white rounded-xl shadow-lg p-6 md:hidden text-center z-50"
+            className="absolute top-[100px] w-[90%] max-w-[890px] bg-white rounded-xl shadow-lg p-6 md:hidden text-center"
           >
             <a href="#" className="block py-3 text-gray-700 hover:text-black">
               Home

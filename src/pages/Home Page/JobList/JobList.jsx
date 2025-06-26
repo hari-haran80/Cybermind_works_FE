@@ -1,4 +1,11 @@
 import React from "react";
+import AmazonIcon from "../../../assets/images/homepage/amazon.png";
+import TeslaIcon from "../../../assets/images/homepage/Tesla.png";
+import SwiggyIcon from "../../../assets/images/homepage/swiggy.png";
+import DefaultIcon from "../../../assets/images/homepage/Logo.png";
+import { BiUserPlus } from "react-icons/bi";
+import { RiBuildingLine } from "react-icons/ri";
+import { RxLayers } from "react-icons/rx";
 
 export const JobList = ({ jobs }) => {
   if (jobs.length === 0) {
@@ -11,53 +18,83 @@ export const JobList = ({ jobs }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-8">
-      {jobs.map((job) => (
-        <div key={job.id} className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow">
-          <div className="p-6">
-            <div className="flex justify-between items-start">
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900">{job.job_title}</h3>
-                <p className="text-gray-600">{job.company_name}</p>
+    <div className="w-full flex flex-wrap justify-evenly gap-6 p-4 mt-6">
+      {jobs.map((job) => {
+        const companyLogo = () => {
+          const name = job.company_name.toLowerCase();
+          if (name.includes("amazon")) return AmazonIcon;
+          if (name.includes("tesla")) return TeslaIcon;
+          if (name.includes("swiggy")) return SwiggyIcon;
+          return DefaultIcon;
+        };
+
+        const annualSalary = job.max_monthly_salary 
+          ? Math.round((job.max_monthly_salary * 12) / 100000) 
+          : "N/A";
+
+        return (
+          <div
+            key={job.id}
+            className="w-[315px] h-[360px] bg-white rounded-lg overflow-hidden shadow-lg transition-shadow p-4"
+          >
+            <div className="flex items-center justify-between w-full h-[83px]">
+              <div className="w-[50%]">
+                <div className="w-[83px] h-[83px] bg-gradient-to-b from-white to-gray-200 border-2 border-white rounded-xl shadow-md shadow-gray-300 flex items-center justify-center">
+                  <img 
+                    src={companyLogo()} 
+                    alt={job.company_name} 
+                    className="w-[65px] h-[65px] object-contain" 
+                  />
+                </div>
               </div>
-              <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">
-                {job.job_type}
-              </span>
+              <div className="w-[50%] h-[83px]">
+                <div className="flex items-start justify-end h-full">
+                  <p className="bg-[#B0D9FF] text-black px-3 py-1 rounded-lg text-[14px]">
+                    {job.time_ago}
+                  </p>
+                </div>
+              </div>
             </div>
-            
-            <div className="mt-4 flex items-center text-sm text-gray-500">
-              <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"></path>
-              </svg>
-              {job.location}
-            </div>
-            
-            <div className="mt-3">
-              <span className="text-sm font-medium text-gray-900">
-                ₹{job.min_monthly_salary?.toLocaleString()} - ₹{job.max_monthly_salary?.toLocaleString()}/mo
-              </span>
-            </div>
-            
             <div className="mt-4">
-              <h4 className="text-sm font-medium text-gray-900">Description:</h4>
-              <ul className="mt-2 text-sm text-gray-600 list-disc pl-5 space-y-1">
-                {job.job_description?.slice(0, 3).map((line, index) => (
-                  <li key={index}>{line}</li>
+              <h1 className="font-[700] text-[20px]">{job.job_title}</h1>
+            </div>
+            <div className="flex items-center justify-between mt-4 text-gray-600">
+              <div className="flex gap-2 items-center justify-center">
+                <span>
+                  <BiUserPlus className="text-[20px]" />
+                </span>
+                <span className="font-[500] text-[16px]">{job.experience}</span>
+              </div>
+              <div className="flex gap-2 items-center justify-center">
+                <span>
+                  <RiBuildingLine className="text-[20px]" />
+                </span>
+                <span className="font-[500] text-[16px]">Onsite</span>
+              </div>
+              <div className="flex gap-2 items-center justify-center">
+                <span>
+                  <RxLayers className="text-[20px]" />
+                </span>
+                <span className="font-[500] text-[16px]">
+                  {annualSalary}LPA
+                </span>
+              </div>
+            </div>
+            <div className="mt-2 p-3">
+              <ul className="list-disc text-[14px] font-[500] text-justify text-gray-600">
+                {job.job_description.slice(0, 2).map((desc, index) => (
+                  <li key={index}>{desc}</li>
                 ))}
               </ul>
             </div>
-            
-            <div className="mt-6 flex items-center justify-between">
-              <span className="text-xs text-gray-500">
-                {job.time_ago}
-              </span>
-              <button className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors">
+            <div className="w-full mt-2">
+              <button className="bg-[#00AAFF] w-full text-[16px] font-[600] text-white rounded-lg p-2">
                 Apply Now
               </button>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };

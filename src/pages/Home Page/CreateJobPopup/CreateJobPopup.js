@@ -113,6 +113,7 @@ export const CreateJobPopup = ({ isOpen, onClose }) => {
       await createJob(payload);
       toast.success(isDraft ? "Draft saved!" : "Job published successfully!");
       onClose();
+      window.location.reload();
     } catch (error) {
       console.error("Job creation failed:", error);
       toast.error("Job creation failed!");
@@ -178,7 +179,6 @@ export const CreateJobPopup = ({ isOpen, onClose }) => {
           Create Job Opening
         </h5>
 
-        {/* Job title and company */}
         <div className="flex items-center justify-evenly mt-6">
           <div className="flex flex-col gap-1">
             <label
@@ -232,7 +232,6 @@ export const CreateJobPopup = ({ isOpen, onClose }) => {
           </div>
         </div>
 
-        {/* Location and job type */}
         <div className="flex items-center justify-evenly mt-6">
           <div className="flex flex-col gap-1 relative" ref={dropdownRef}>
             <label
@@ -307,12 +306,11 @@ export const CreateJobPopup = ({ isOpen, onClose }) => {
             >
               <span>{formData.job_type}</span>
               <motion.span
-  animate={{ rotate: dropdowns.job_type ? 180 : 0 }}
-  transition={{ duration: 0.3 }}
->
-  {dropdowns.job_type ? <IoIosArrowUp /> : <IoIosArrowDown />}
-</motion.span>
-
+                animate={{ rotate: dropdowns.job_type ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {dropdowns.job_type ? <IoIosArrowUp /> : <IoIosArrowDown />}
+              </motion.span>
             </div>
 
             <AnimatePresence>
@@ -346,7 +344,6 @@ export const CreateJobPopup = ({ isOpen, onClose }) => {
           </div>
         </div>
 
-        {/* Salary range and deadline */}
         <div className="flex items-center justify-evenly mt-6">
           <div className="flex flex-col gap-1">
             <label
@@ -359,7 +356,6 @@ export const CreateJobPopup = ({ isOpen, onClose }) => {
               Salary Range
             </label>
             <div className="flex gap-3">
-              {/* Min Salary Input */}
               <div className="relative">
                 <div className="absolute left-3 top-1/2 transform -translate-y-1/2 flex items-center gap-1">
                   <RiArrowUpDownLine className="text-gray-400" />
@@ -380,7 +376,6 @@ export const CreateJobPopup = ({ isOpen, onClose }) => {
                 />
               </div>
 
-              {/* Max Salary Input */}
               <div className="relative">
                 <div className="absolute left-3 top-1/2 transform -translate-y-1/2 flex items-center gap-1">
                   <RiArrowUpDownLine className="text-gray-400" />
@@ -413,7 +408,6 @@ export const CreateJobPopup = ({ isOpen, onClose }) => {
             )}
           </div>
 
-          {/* Application Deadline */}
           <div className="flex flex-col gap-1">
             <label
               className={`font-[600] text-[20px] ${
@@ -441,7 +435,6 @@ export const CreateJobPopup = ({ isOpen, onClose }) => {
           </div>
         </div>
 
-        {/* Job description */}
         <div className="flex flex-col gap-1 mt-6 w-[95%] mx-auto">
           <label
             className={`font-[600] text-[20px] ${
@@ -469,7 +462,6 @@ export const CreateJobPopup = ({ isOpen, onClose }) => {
           )}
         </div>
 
-        {/* Buttons */}
         <div className="flex items-center justify-between mt-6 w-[95%] mx-auto">
           <button
             onClick={() => handleSubmit(true)}
@@ -502,26 +494,3 @@ export const CreateJobPopup = ({ isOpen, onClose }) => {
     </div>
   );
 };
-
-const Spinner = ({ color = "black" }) => (
-  <svg
-    className="animate-spin h-5 w-5"
-    viewBox="0 0 24 24"
-    fill="none"
-    style={{ color }}
-  >
-    <circle
-      className="opacity-25"
-      cx="12"
-      cy="12"
-      r="10"
-      stroke="currentColor"
-      strokeWidth="4"
-    ></circle>
-    <path
-      className="opacity-75"
-      fill="currentColor"
-      d="M4 12a8 8 0 018-8v8z"
-    ></path>
-  </svg>
-);

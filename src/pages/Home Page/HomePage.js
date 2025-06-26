@@ -8,7 +8,6 @@ const HomePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Memoized filter handler with debouncing
   const handleFilterChange = useCallback(async (filters) => {
     setIsLoading(true);
     setError(null);
@@ -24,7 +23,6 @@ const HomePage = () => {
     }
   }, []);
 
-  // Initial data load
   useEffect(() => {
     handleFilterChange({
       min: 50000,

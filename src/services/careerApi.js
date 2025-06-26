@@ -12,7 +12,6 @@ const api = axios.create({
 // Get Jobs with Filters
 export const getJobs = async (filters = {}) => {
   try {
-    // Clean up empty filters
     const params = Object.fromEntries(
       Object.entries(filters).filter(([_, value]) => 
         value !== "" && value !== null && value !== undefined

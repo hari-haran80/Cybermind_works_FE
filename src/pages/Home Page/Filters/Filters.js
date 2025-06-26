@@ -22,7 +22,6 @@ export const Filters = ({ onFilterChange = () => {} }) => {
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch initial data
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -36,7 +35,6 @@ export const Filters = ({ onFilterChange = () => {} }) => {
         setLocations(locs);
         setSalaryRange(range);
         
-        // Initialize filters with overall salary range
         setFilters(prev => ({
           ...prev,
           min: range.min_salary,
@@ -52,18 +50,16 @@ export const Filters = ({ onFilterChange = () => {} }) => {
     fetchData();
   }, []);
 
-  // Debounce filter changes
   useEffect(() => {
     if (filters.min === null || filters.max === null) return;
     
     const handler = setTimeout(() => {
       onFilterChange(filters);
-    }, 500); // 500ms debounce delay
+    }, 500);
 
     return () => clearTimeout(handler);
   }, [filters, onFilterChange]);
 
-  // Handler functions
   const handleTitleSelect = (title) => {
     setFilters(prev => ({ ...prev, job_title: title }));
   };
@@ -108,7 +104,6 @@ export const Filters = ({ onFilterChange = () => {} }) => {
   return (
     <div className="w-full border-b  shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] p-4">
       <div className="w-full gap-6 h-full flex items-center justify-between">
-        {/* Job Title Filter */}
         <div className="w-[25%]">
           <TitleSearchFilter
             jobTitles={jobTitles}
@@ -117,7 +112,6 @@ export const Filters = ({ onFilterChange = () => {} }) => {
           />
         </div>
         
-        {/* Location Filter */}
         <div className="w-[25%]">
           <LocationFilter
             locations={locations}
@@ -126,7 +120,6 @@ export const Filters = ({ onFilterChange = () => {} }) => {
           />
         </div>
         
-        {/* Job Type Filter */}
         <div className="w-[25%]">
           <JobTypeFilter
             onSelect={handleJobTypeSelect}
@@ -134,7 +127,6 @@ export const Filters = ({ onFilterChange = () => {} }) => {
           />
         </div>
         
-        {/* Salary Range Filter */}
         <div className="w-[25%]">
           <SalaryRangeFilter
             minValue={filters.min}

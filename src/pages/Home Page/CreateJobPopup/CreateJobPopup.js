@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { RiArrowUpDownLine } from "react-icons/ri";
 import { motion, AnimatePresence } from "framer-motion";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import { FaAnglesDown, FaAnglesRight } from "react-icons/fa6";
 
 export const CreateJobPopup = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -396,16 +397,22 @@ export const CreateJobPopup = ({ isOpen, onClose }) => {
                 />
               </div>
             </div>
-            {errors.min_monthly_salary && (
-              <span className="text-red-500 text-sm">
-                {errors.min_monthly_salary}
-              </span>
-            )}
-            {errors.max_monthly_salary && (
-              <span className="text-red-500 text-sm">
-                {errors.max_monthly_salary}
-              </span>
-            )}
+            <div className="w-full flex items-center gap-5 justify-between">
+              <div className="text-left w-[50%]">
+                {errors.min_monthly_salary && (
+                  <span className="text-red-500 text-sm">
+                    {errors.min_monthly_salary}
+                  </span>
+                )}
+              </div>
+              <div className="text-left w-[50%]">
+                {errors.max_monthly_salary && (
+                  <span className="text-red-500 text-sm">
+                    {errors.max_monthly_salary}
+                  </span>
+                )}
+              </div>
+            </div>
           </div>
 
           <div className="flex flex-col gap-1">
@@ -453,7 +460,7 @@ export const CreateJobPopup = ({ isOpen, onClose }) => {
                 ? "border border-black"
                 : "border border-gray-500"
             }`}
-            placeholder="Describe the main responsibilities and role"
+            placeholder="Please share a description to let the candidate know more about the job role"
           ></textarea>
           {errors.job_description && (
             <span className="text-red-500 text-sm">
@@ -473,7 +480,9 @@ export const CreateJobPopup = ({ isOpen, onClose }) => {
                 <Spinner /> Saving...
               </>
             ) : (
-              "Save Draft"
+              <div className="flex items-center justify-center gap-2">
+                Save Draft <FaAnglesDown className="text-[18px]" />
+              </div>
             )}
           </button>
           <button
@@ -486,7 +495,9 @@ export const CreateJobPopup = ({ isOpen, onClose }) => {
                 <Spinner color="white" /> Publishing...
               </>
             ) : (
-              "Publish"
+              <div className="flex items-center justify-center gap-2">
+                Publish <FaAnglesRight className="text-[18px]" />
+              </div>
             )}
           </button>
         </div>

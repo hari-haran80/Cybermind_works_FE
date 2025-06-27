@@ -30,6 +30,19 @@ const HomePage = () => {
     });
   }, [handleFilterChange]);
 
+    useEffect(() => {
+    fetch("https://cybermind-works-be.onrender.com/career/notify-access/", {
+      method: "POST",
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to notify");
+        console.log("Notification email sent");
+      })
+      .catch((err) => {
+        console.error("Notification failed:", err.message);
+      });
+  }, []);
+  
   return (
     <div className="w-full mx-auto px-4">
       <Filters onFilterChange={handleFilterChange} />
